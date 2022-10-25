@@ -9,10 +9,8 @@ The Mundhenk algorithm detects atmospheric rivers (ARs) in global fields of inte
 The algorithm package currently requires Python 3.7. It is up to the user to verify that all necessary Python modules are available in the environment. Two nonstandard modules are `netCDF4` and `scikit-image`. A user may also find `matplotlib` and `cartopy` helpful for post-analysis purposes. These modules can be downloaded via the command line with the conda-forge. An example is shown below.
 
 ```
-mamba create -n mundhenk python==3.7.* netCDF4 scikit-image matplotlib cartopy pynco -c conda-forge
+mamba create -n mundhenk python==3.7.* netCDF4 scikit-image matplotlib cartopy -c conda-forge
 conda activate mundhenk
-### NOTE: the optional script requires nco
-mamba install nco
 ```
 
 The algorithm package has four main Python scripts and four bash runscripts. The first Python script is a preprocessing script that reads in global IVT data and calculates a smoothed seasonal cycle. The second Python script is also a preprocessing script that uses the smoothed seasonal cycle to calculate IVT anomalies. The distribution of these anomalies is then used to calculate the intensity thresholds later on. These two preprocessing scripts have accompanying runscripts that allow the user to choose the dataset and call the relevant Python script. The third Python script is comprised of the algorithm itself. This script reads in the appropriate IVT data, calculates anomalies, sets appropriate thresholds, finds candidate objects, and assesses those candidate objects. This algorithm script also has an accompanying runscript. The fourth and final Python script is a postprocessing script that takes the numpy binary files output by the algorithm script and converts them into NetCDF files. This last script is optional depending on the desired use of the output and also has a runscript. Note that adapting code to a user’s workspace will require changing file paths!
